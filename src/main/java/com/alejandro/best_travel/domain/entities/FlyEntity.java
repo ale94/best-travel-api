@@ -1,19 +1,25 @@
 package com.alejandro.best_travel.domain.entities;
 
 import com.alejandro.best_travel.util.AeroLine;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Set;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity(name = "fly")
 @NoArgsConstructor
@@ -40,5 +46,15 @@ public class FlyEntity implements Serializable {
     @Column(length = 20)
     @Enumerated(EnumType.STRING)
     private AeroLine aeroLine;
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER,
+        orphanRemoval = true,
+        mappedBy = "fly"
+    )
+    private Set<TicketEntity> tickets;
 
 }
