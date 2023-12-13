@@ -33,14 +33,14 @@ public class FlyEntity implements Serializable {
     private Long id;
     private Double originLat;
     private Double originLng;
-    private Double DestinyLat;
-    private Double DestinyLng;
+    private Double destinyLat;
+    private Double destinyLng;
 
     @Column(length = 20)
     private String originName;
 
     @Column(length = 20)
-    private String DestinyName;
+    private String destinyName;
     private BigDecimal price;
 
     @Column(length = 20)
