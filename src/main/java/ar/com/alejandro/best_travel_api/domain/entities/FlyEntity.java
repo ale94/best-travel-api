@@ -2,11 +2,19 @@ package ar.com.alejandro.best_travel_api.domain.entities;
 
 import ar.com.alejandro.best_travel_api.util.AeroLine;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity(name = "fly")
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
 public class FlyEntity implements Serializable {
 
     @Id
