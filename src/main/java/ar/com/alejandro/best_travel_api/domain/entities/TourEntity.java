@@ -9,39 +9,22 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity(name = "customer")
+@Entity(name = "tour")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @Builder
-public class CustomerEntity implements Serializable {
+public class TourEntity implements Serializable {
 
     @Id
-    @Column(length = 20)
-    private String dni;
-    @Column(length = 50)
-    private String fullName;
-    @Column(length = 20)
-    private String creditCard;
-    @Column(length = 20)
-    private String phoneNumber;
-    private Integer totalFlights;
-    private Integer totalLodgings;
-    private Integer totalTours;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true,
-            mappedBy = "customer"
-    )
-    private List<TourEntity> tours;
-
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true,
-            mappedBy = "customer"
+            mappedBy = "tour"
     )
     private List<ReservationEntity> reservations;
 
@@ -49,8 +32,11 @@ public class CustomerEntity implements Serializable {
             cascade = CascadeType.ALL,
             fetch = FetchType.EAGER,
             orphanRemoval = true,
-            mappedBy = "customer"
+            mappedBy = "tour"
     )
     private List<TicketEntity> tickets;
 
+    @ManyToOne
+    @JoinColumn(name = "id_customer")
+    private CustomerEntity customer;
 }

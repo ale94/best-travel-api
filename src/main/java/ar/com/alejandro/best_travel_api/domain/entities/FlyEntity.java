@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity(name = "fly")
 @NoArgsConstructor
@@ -31,5 +32,13 @@ public class FlyEntity implements Serializable {
     private BigDecimal price;
     @Enumerated(EnumType.STRING)
     private AeroLine aeroLine;
+
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER,
+        orphanRemoval = true,
+        mappedBy = "fly"
+    )
+    private List<TicketEntity> tickets;
 
 }

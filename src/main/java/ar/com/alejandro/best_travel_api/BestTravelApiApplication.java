@@ -25,11 +25,11 @@ public class BestTravelApiApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        var fly = flyRepository.findById(155L).orElseThrow();
+        /*var fly = flyRepository.findById(155L).orElseThrow();
         var hotel = hotelRepository.findById(75L).orElseThrow();
 
         log.info(String.valueOf(fly));
-        log.info(String.valueOf(hotel));
+        log.info(String.valueOf(hotel));*/
 
     }
 }
