@@ -28,17 +28,8 @@ public class BestTravelApiApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        var fly = flyRepository.findById(15L).orElseThrow();
-        var hotel = hotelRepository.findById(7L).orElseThrow();
-        var ticket = ticketRepository.findById(UUID.fromString("32345678-1234-5678-4234-567812345678")).orElseThrow();
-        var reservation = reservationRepository.findById(UUID.fromString("52345678-1234-5678-1234-567812345678")).orElseThrow();
-        var customer = customerRepository.findById("BBMB771012HMCRR022").orElseThrow();
-
-        log.info(String.valueOf(fly));
+        var hotel = hotelRepository.findByReservationsId(UUID.fromString("12345678-1234-5678-1234-567812345678")).orElseThrow();
         log.info(String.valueOf(hotel));
-        log.info(String.valueOf(ticket));
-        log.info(String.valueOf(reservation));
-        log.info(String.valueOf(customer));
 
     }
 }
