@@ -5,10 +5,12 @@ import ar.com.alejandro.best_travel_api.api.models.responses.ReservationResponse
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "reservation")
@@ -20,5 +22,26 @@ public class ReservationController {
     @PostMapping
     public ResponseEntity<ReservationResponse> post(@RequestBody ReservationRequest request) {
         return ResponseEntity.ok(reservationService.create(request));
+    }
+
+    @GetMapping(path = "{id}")
+    public ResponseEntity<ReservationResponse> get(@PathVariable UUID id) {
+        return ResponseEntity.ok(reservationService.read(id));
+    }
+
+    @PutMapping(path = "{id}")
+    public ResponseEntity<ReservationResponse> put(@RequestBody ReservationRequest request, @PathVariable UUID id) {
+        return ResponseEntity.ok(reservationService.update(request, id));
+    }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+        this.reservationService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<Map<String, BigDecimal>> getHotelPrice(@RequestParam Long hotelId) {
+        return ResponseEntity.ok(Collections.singletonMap("hotelPrice", reservationService.findPrice(hotelId)));
     }
 }
