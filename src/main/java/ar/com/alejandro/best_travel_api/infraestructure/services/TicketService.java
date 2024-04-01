@@ -37,7 +37,7 @@ public class TicketService implements ITicketService {
                 .id(UUID.randomUUID())
                 .fly(fly)
                 .customer(customer)
-                .price(fly.getPrice().multiply(BigDecimal.valueOf(0.25)))
+                .price(fly.getPrice().multiply(CHARGE_PRICE_PERCENTAGE))
                 .purchaseDate(LocalDateTime.now())
                 .arrivalDate(LocalDateTime.now())
                 .departureDate(LocalDateTime.now())
@@ -61,7 +61,7 @@ public class TicketService implements ITicketService {
         var fly = flyRepository.findById(request.getIdFly()).orElseThrow();
 
         ticketToUpdate.setFly(fly);
-        ticketToUpdate.setPrice(BigDecimal.valueOf(0.25));
+        ticketToUpdate.setPrice(fly.getPrice().multiply(CHARGE_PRICE_PERCENTAGE));
         ticketToUpdate.setDepartureDate(LocalDateTime.now());
         ticketToUpdate.setArrivalDate(LocalDateTime.now());
 
@@ -77,6 +77,12 @@ public class TicketService implements ITicketService {
         this.ticketRepository.delete(ticketToDelete);
     }
 
+    @Override
+    public BigDecimal findPrice(Long flyId) {
+        var fly = flyRepository.findById(flyId).orElseThrow();
+        return fly.getPrice().multiply(CHARGE_PRICE_PERCENTAGE);
+    }
+
     private TicketResponse entityToResponse(TicketEntity entity) {
         var response = new TicketResponse();
         BeanUtils.copyProperties(entity, response);
@@ -85,4 +91,7 @@ public class TicketService implements ITicketService {
         response.setFly(flyResponse);
         return response;
     }
+
+    private static final BigDecimal CHARGE_PRICE_PERCENTAGE = BigDecimal.valueOf(0.25);
+
 }
