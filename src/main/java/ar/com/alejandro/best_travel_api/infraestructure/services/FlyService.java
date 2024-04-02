@@ -36,17 +36,27 @@ public class FlyService implements IFlyService {
 
     @Override
     public List<FlyResponse> readLessPrice(BigDecimal price) {
-        return null;
+        return this.flyRepository.selectLessPrice(price)
+                .stream()
+                .map(this::entityToResponse)
+                .toList();
+
     }
 
     @Override
     public List<FlyResponse> readBetweenPrice(BigDecimal min, BigDecimal max) {
-        return null;
+        return this.flyRepository.selectBetweenPrice(min, max)
+                .stream()
+                .map(this::entityToResponse)
+                .toList();
     }
 
     @Override
     public List<FlyResponse> readByOriginDestiny(String origin, String destiny) {
-        return null;
+        return this.flyRepository.selectOriginDestiny(origin, destiny)
+                .stream()
+                .map(this::entityToResponse)
+                .toList();
     }
 
     public FlyResponse entityToResponse(FlyEntity entity) {
