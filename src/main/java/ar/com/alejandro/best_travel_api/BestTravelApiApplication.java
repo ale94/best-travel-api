@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class BestTravelApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BestTravelApiApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BestTravelApiApplication.class, args);
+    }
 
 }
