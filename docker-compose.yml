@@ -10,7 +10,7 @@ services:
       - ./db/sql/data.sql:/docker-entrypoint-initdb.d/data.sql
     environment:
       - POSTGRES_DB=${SPRING_DATASOURCE_DB}
-      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME
+      - POSTGRES_USER=${SPRING_DATASOURCE_USERNAME}
       - POSTGRES_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     ports:
       - "5432:5432"
