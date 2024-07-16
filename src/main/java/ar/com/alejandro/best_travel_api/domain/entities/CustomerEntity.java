@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "customer")
 @NoArgsConstructor
@@ -34,7 +34,7 @@ public class CustomerEntity implements Serializable {
             orphanRemoval = true,
             mappedBy = "customer"
     )
-    private List<TourEntity> tours;
+    private Set<TourEntity> tours;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -44,7 +44,7 @@ public class CustomerEntity implements Serializable {
             orphanRemoval = true,
             mappedBy = "customer"
     )
-    private List<ReservationEntity> reservations;
+    private Set<ReservationEntity> reservations;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -54,6 +54,6 @@ public class CustomerEntity implements Serializable {
             orphanRemoval = true,
             mappedBy = "customer"
     )
-    private List<TicketEntity> tickets;
+    private Set<TicketEntity> tickets;
 
 }

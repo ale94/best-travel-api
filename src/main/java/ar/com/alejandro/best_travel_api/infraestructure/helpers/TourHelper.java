@@ -55,6 +55,7 @@ public class TourHelper {
                     .customer(customer)
                     .totalDays(totalDays)
                     .build();
+            response.add(reservationRepository.save(reservationToPersist));
         });
         return response;
     }

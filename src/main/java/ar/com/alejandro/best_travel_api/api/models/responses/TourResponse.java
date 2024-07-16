@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -15,6 +15,6 @@ import java.util.UUID;
 @Builder
 public class TourResponse implements Serializable {
     private Long id;
-    private List<UUID> ticketIds;
-    private List<UUID> reservationIds;
+    private Set<UUID> ticketIds;
+    private Set<UUID> reservationIds;
 }

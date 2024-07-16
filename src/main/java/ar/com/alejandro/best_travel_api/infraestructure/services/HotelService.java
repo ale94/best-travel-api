@@ -14,7 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Transactional
 @Service
@@ -35,27 +36,27 @@ public class HotelService implements IHotelService {
     }
 
     @Override
-    public List<HotelResponse> readLessPrice(BigDecimal price) {
+    public Set<HotelResponse> readLessPrice(BigDecimal price) {
         return this.hotelRepository.findByPriceLessThan(price)
                 .stream()
                 .map(this::entityToResponse)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public List<HotelResponse> readBetweenPrice(BigDecimal min, BigDecimal max) {
+    public Set<HotelResponse> readBetweenPrice(BigDecimal min, BigDecimal max) {
         return this.hotelRepository.findByPriceBetween(min, max)
                 .stream()
                 .map(this::entityToResponse)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     @Override
-    public List<HotelResponse> readByRating(Integer rating) {
+    public Set<HotelResponse> readByRating(Integer rating) {
         return this.hotelRepository.findByRatingGreaterThan(rating)
                 .stream()
                 .map(this::entityToResponse)
-                .toList();
+                .collect(Collectors.toSet());
     }
 
     private HotelResponse entityToResponse(HotelEntity entity) {

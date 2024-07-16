@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity(name = "tour")
@@ -28,7 +28,7 @@ public class TourEntity implements Serializable {
             orphanRemoval = true,
             mappedBy = "tour"
     )
-    private List<ReservationEntity> reservations;
+    private Set<ReservationEntity> reservations;
 
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
@@ -38,19 +38,19 @@ public class TourEntity implements Serializable {
             orphanRemoval = true,
             mappedBy = "tour"
     )
-    private List<TicketEntity> tickets;
+    private Set<TicketEntity> tickets;
 
     @ManyToOne
     @JoinColumn(name = "id_customer")
     private CustomerEntity customer;
 
     public void addTicket(TicketEntity ticket) {
-        if (Objects.isNull(this.tickets)) this.tickets = new ArrayList<>();
+        if (Objects.isNull(this.tickets)) this.tickets = new HashSet<>();
         this.tickets.add(ticket);
     }
 
     public void removeTicket(UUID id) {
-        if (Objects.isNull(this.tickets)) this.tickets = new ArrayList<>();
+        if (Objects.isNull(this.tickets)) this.tickets = new HashSet<>();
         this.tickets.removeIf(ticket -> ticket.getId().equals(id));
     }
 
@@ -59,12 +59,12 @@ public class TourEntity implements Serializable {
     }
 
     public void addReservation(ReservationEntity reservation) {
-        if (Objects.isNull(this.reservations)) this.reservations = new ArrayList<>();
+        if (Objects.isNull(this.reservations)) this.reservations = new HashSet<>();
         this.reservations.add(reservation);
     }
 
     public void removeReservation(UUID id) {
-        if (Objects.isNull(this.reservations)) this.reservations = new ArrayList<>();
+        if (Objects.isNull(this.reservations)) this.reservations = new HashSet<>();
         this.reservations.removeIf(reservation -> reservation.getId().equals(id));
     }
 

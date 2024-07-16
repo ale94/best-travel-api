@@ -6,7 +6,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "fly")
 @NoArgsConstructor
@@ -33,11 +33,11 @@ public class FlyEntity implements Serializable {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(
-        cascade = CascadeType.ALL,
-        fetch = FetchType.EAGER,
-        orphanRemoval = true,
-        mappedBy = "fly"
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true,
+            mappedBy = "fly"
     )
-    private List<TicketEntity> tickets;
+    private Set<TicketEntity> tickets;
 
 }

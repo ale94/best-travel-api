@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
+import java.util.Set;
 
 @Entity(name = "hotel")
 @NoArgsConstructor
@@ -25,10 +25,10 @@ public class HotelEntity {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(
-        cascade = CascadeType.ALL,
-        fetch = FetchType.EAGER,
-        orphanRemoval = true,
-        mappedBy = "hotel"
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true,
+            mappedBy = "hotel"
     )
-    private List<ReservationEntity> reservations;
+    private Set<ReservationEntity> reservations;
 }
