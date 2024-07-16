@@ -48,8 +48,8 @@ Esta API REST permite gestionar tours, tickets, reservas, hoteles, clientes y vu
 
 ## Instalación
 
-1. Clona el repositorio: `git clone https://github.com/tuusuario/api-gestion-tours.git`
-2. Navega al directorio del proyecto: `cd api-gestion-tours`
+1. Clona el repositorio: `https://github.com/ale94/best-travel-api.git`
+2. Navega al directorio del proyecto: `cd best-travel-api`
 3. Instala las dependencias: `mvn install`
 4. Ejecuta la aplicación: `mvn spring-boot:run`
 
