@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "fly")
@@ -30,13 +30,13 @@ public class FlyController {
     }
 
     @GetMapping(path = "less_price")
-    public ResponseEntity<List<FlyResponse>> getLessPrice(@RequestParam BigDecimal price) {
+    public ResponseEntity<Set<FlyResponse>> getLessPrice(@RequestParam BigDecimal price) {
         var response = this.flyService.readLessPrice(price);
         return response.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "between_price")
-    public ResponseEntity<List<FlyResponse>> getBetweenPrice(
+    public ResponseEntity<Set<FlyResponse>> getBetweenPrice(
             @RequestParam BigDecimal min,
             @RequestParam BigDecimal max) {
         var response = this.flyService.readBetweenPrice(min, max);
@@ -44,7 +44,7 @@ public class FlyController {
     }
 
     @GetMapping(path = "origin_destiny")
-    public ResponseEntity<List<FlyResponse>> getByOriginDestiny(
+    public ResponseEntity<Set<FlyResponse>> getByOriginDestiny(
             @RequestParam String origin,
             @RequestParam String destiny) {
         var response = this.flyService.readByOriginDestiny(origin, destiny);

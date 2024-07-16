@@ -9,8 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "hotel")
@@ -30,13 +30,13 @@ public class HotelController {
     }
 
     @GetMapping(path = "less_price")
-    public ResponseEntity<List<HotelResponse>> getLessPrice(@RequestParam BigDecimal price) {
+    public ResponseEntity<Set<HotelResponse>> getLessPrice(@RequestParam BigDecimal price) {
         var response = this.hotelService.readLessPrice(price);
         return response.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok(response);
     }
 
     @GetMapping(path = "between_price")
-    public ResponseEntity<List<HotelResponse>> getBetweenPrice(
+    public ResponseEntity<Set<HotelResponse>> getBetweenPrice(
             @RequestParam BigDecimal min,
             @RequestParam BigDecimal max) {
         var response = this.hotelService.readBetweenPrice(min, max);
@@ -44,7 +44,7 @@ public class HotelController {
     }
 
     @GetMapping(path = "rating")
-    public ResponseEntity<List<HotelResponse>> getByRating(
+    public ResponseEntity<Set<HotelResponse>> getByRating(
             @RequestParam Integer rating) {
         if (rating > 4) rating = 4;
         if (rating < 1) rating = 1;
