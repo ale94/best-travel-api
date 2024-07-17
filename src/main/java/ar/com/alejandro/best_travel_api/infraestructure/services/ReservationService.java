@@ -8,6 +8,7 @@ import ar.com.alejandro.best_travel_api.domain.repositories.CustomerRepository;
 import ar.com.alejandro.best_travel_api.domain.repositories.HotelRepository;
 import ar.com.alejandro.best_travel_api.domain.repositories.ReservationRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IReservationService;
+import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -28,6 +29,7 @@ public class ReservationService implements IReservationService {
     private final CustomerRepository customerRepository;
     private final HotelRepository hotelRepository;
     private final ReservationRepository reservationRepository;
+    private final CustomerHelper customerHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -47,6 +49,8 @@ public class ReservationService implements IReservationService {
 
         var reservationPersisted = this.reservationRepository.save(reservationToPersist);
         log.info("Reservation saved with id {}", reservationPersisted.getId());
+
+        this.customerHelper.incrase(customer.getDni(), ReservationService.class);
 
         return this.entityToResponse(reservationPersisted);
     }

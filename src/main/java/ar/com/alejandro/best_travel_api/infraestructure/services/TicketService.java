@@ -8,6 +8,7 @@ import ar.com.alejandro.best_travel_api.domain.repositories.CustomerRepository;
 import ar.com.alejandro.best_travel_api.domain.repositories.FlyRepository;
 import ar.com.alejandro.best_travel_api.domain.repositories.TicketRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITicketService;
+import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;
 import ar.com.alejandro.best_travel_api.util.BestTravelUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class TicketService implements ITicketService {
     private final FlyRepository flyRepository;
     private final CustomerRepository customerRepository;
     private final TicketRepository ticketRepository;
+    private final CustomerHelper customerHelper;
 
     @Override
     public TicketResponse create(TicketRequest request) {
@@ -46,6 +48,8 @@ public class TicketService implements ITicketService {
 
         var ticketPersisted = this.ticketRepository.save(ticketToPersist);
         log.info("Ticket saved with id {}", ticketPersisted.getId());
+
+        this.customerHelper.incrase(customer.getDni(), TicketService.class);
 
         return this.entityToResponse(ticketPersisted);
     }

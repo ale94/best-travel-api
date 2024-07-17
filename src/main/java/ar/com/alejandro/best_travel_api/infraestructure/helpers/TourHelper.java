@@ -73,4 +73,18 @@ public class TourHelper {
         return this.ticketRepository.save(ticketToPersist);
     }
 
+    public ReservationEntity createReservation(HotelEntity hotel, CustomerEntity customer, Integer totalDays) {
+        var reservationToPersist = ReservationEntity.builder()
+                .id(UUID.randomUUID())
+                .dateTimeReservation(LocalDateTime.now())
+                .dateStart(LocalDate.now())
+                .dateEnd(LocalDate.now().plusDays(totalDays))
+                .price(hotel.getPrice().add(hotel.getPrice().multiply(ReservationService.CHARGES_PRICE_PERCENTAGE)))
+                .hotel(hotel)
+                .customer(customer)
+                .totalDays(totalDays)
+                .build();
+        return this.reservationRepository.save(reservationToPersist);
+    }
+
 }
