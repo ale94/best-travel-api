@@ -60,4 +60,17 @@ public class TourHelper {
         return response;
     }
 
+    public TicketEntity createTicket(FlyEntity fly, CustomerEntity customer) {
+        var ticketToPersist = TicketEntity.builder()
+                .id(UUID.randomUUID())
+                .fly(fly)
+                .customer(customer)
+                .price(fly.getPrice().add(fly.getPrice().multiply(TicketService.CHARGES_PRICE_PERCENTAGE)))
+                .purchaseDate(LocalDateTime.now())
+                .arrivalDate(BestTravelUtil.getRandomLatter())
+                .departureDate(BestTravelUtil.getRandomSoon())
+                .build();
+        return this.ticketRepository.save(ticketToPersist);
+    }
+
 }

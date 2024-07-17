@@ -7,6 +7,10 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.UUID;
+
 @RestController
 @RequestMapping(path = "tour")
 @AllArgsConstructor
@@ -28,6 +32,18 @@ public class TourController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         this.tourService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(path = "{tourId}/remove_ticket/{ticketId}")
+    public ResponseEntity<Void> deleteTicket(@PathVariable UUID ticketId, @PathVariable Long tourId) {
+        this.tourService.removeTicket(ticketId, tourId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(path = "{tourId}/add_ticket/{flyId}")
+    public ResponseEntity<Map<String, UUID>> postTicket(@PathVariable Long flyId, @PathVariable Long tourId) {
+        var response = Collections.singletonMap("ticketId", this.tourService.addTicket(flyId, tourId));
+        return ResponseEntity.ok(response);
     }
 
 }
