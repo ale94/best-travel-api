@@ -4,7 +4,7 @@ import ar.com.alejandro.best_travel_api.api.models.responses.FlyResponse;
 import ar.com.alejandro.best_travel_api.domain.entities.FlyEntity;
 import ar.com.alejandro.best_travel_api.domain.repositories.FlyRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IFlyService;
-import ar.com.alejandro.best_travel_api.util.SortType;
+import ar.com.alejandro.best_travel_api.util.enums.SortType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;

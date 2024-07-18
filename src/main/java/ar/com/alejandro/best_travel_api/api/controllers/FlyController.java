@@ -2,7 +2,7 @@ package ar.com.alejandro.best_travel_api.api.controllers;
 
 import ar.com.alejandro.best_travel_api.api.models.responses.FlyResponse;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IFlyService;
-import ar.com.alejandro.best_travel_api.util.SortType;
+import ar.com.alejandro.best_travel_api.util.enums.SortType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package ar.com.alejandro.best_travel_api.api.models.responses;
 
-import ar.com.alejandro.best_travel_api.util.AeroLine;
+import ar.com.alejandro.best_travel_api.util.enums.AeroLine;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

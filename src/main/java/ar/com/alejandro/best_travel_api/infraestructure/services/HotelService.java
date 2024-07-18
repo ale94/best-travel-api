@@ -4,7 +4,7 @@ import ar.com.alejandro.best_travel_api.api.models.responses.HotelResponse;
 import ar.com.alejandro.best_travel_api.domain.entities.HotelEntity;
 import ar.com.alejandro.best_travel_api.domain.repositories.HotelRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IHotelService;
-import ar.com.alejandro.best_travel_api.util.SortType;
+import ar.com.alejandro.best_travel_api.util.enums.SortType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;

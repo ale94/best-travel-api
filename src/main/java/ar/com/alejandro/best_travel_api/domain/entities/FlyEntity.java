@@ -1,6 +1,6 @@
 package ar.com.alejandro.best_travel_api.domain.entities;
 
-import ar.com.alejandro.best_travel_api.util.AeroLine;
+import ar.com.alejandro.best_travel_api.util.enums.AeroLine;
 import jakarta.persistence.*;
 import lombok.*;
 

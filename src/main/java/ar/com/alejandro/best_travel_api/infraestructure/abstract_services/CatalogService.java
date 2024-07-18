@@ -1,6 +1,6 @@
 package ar.com.alejandro.best_travel_api.infraestructure.abstract_services;
 
-import ar.com.alejandro.best_travel_api.util.SortType;
+import ar.com.alejandro.best_travel_api.util.enums.SortType;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
