@@ -1,9 +1,13 @@
 package ar.com.alejandro.best_travel_api.api.controllers;
 
 import ar.com.alejandro.best_travel_api.api.models.requests.TourRequest;
+import ar.com.alejandro.best_travel_api.api.models.responses.ErrorsResponse;
 import ar.com.alejandro.best_travel_api.api.models.responses.TourResponse;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITourService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,13 @@ public class TourController {
 
     private final ITourService tourService;
 
+    @ApiResponse(
+            responseCode = "400",
+            description = "When the request hace a field invalid we response this",
+            content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResponse.class))
+            }
+    )
     @Operation(summary = "Save in system un tour based in list of hotels and flights")
     @PostMapping
     public ResponseEntity<TourResponse> post(@RequestBody TourRequest request) {

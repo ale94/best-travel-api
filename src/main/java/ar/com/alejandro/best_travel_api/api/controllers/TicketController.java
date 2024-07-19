@@ -1,8 +1,12 @@
 package ar.com.alejandro.best_travel_api.api.controllers;
 
 import ar.com.alejandro.best_travel_api.api.models.requests.TicketRequest;
+import ar.com.alejandro.best_travel_api.api.models.responses.ErrorsResponse;
 import ar.com.alejandro.best_travel_api.api.models.responses.TicketResponse;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITicketService;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +25,13 @@ public class TicketController {
 
     private final ITicketService ticketService;
 
+    @ApiResponse(
+            responseCode = "400",
+            description = "When the request hace a field invalid we response this",
+            content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = ErrorsResponse.class))
+            }
+    )
     @PostMapping
     public ResponseEntity<TicketResponse> post(@RequestBody TicketRequest request) {
         return ResponseEntity.ok(ticketService.create(request));
