@@ -3,6 +3,7 @@ package ar.com.alejandro.best_travel_api.api.controllers;
 import ar.com.alejandro.best_travel_api.api.models.requests.ReservationRequest;
 import ar.com.alejandro.best_travel_api.api.models.responses.ReservationResponse;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IReservationService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "reservation")
 @RequiredArgsConstructor
+@Tag(name = "Reservation")
 public class ReservationController {
 
     private final IReservationService reservationService;

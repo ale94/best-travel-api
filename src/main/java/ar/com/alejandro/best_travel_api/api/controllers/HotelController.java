@@ -3,6 +3,7 @@ package ar.com.alejandro.best_travel_api.api.controllers;
 import ar.com.alejandro.best_travel_api.api.models.responses.HotelResponse;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IHotelService;
 import ar.com.alejandro.best_travel_api.util.enums.SortType;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.Set;
 @RestController
 @RequestMapping(path = "hotel")
 @RequiredArgsConstructor
+@Tag(name = "Hotel")
 public class HotelController {
 
     private final IHotelService hotelService;

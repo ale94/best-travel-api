@@ -3,6 +3,7 @@ package ar.com.alejandro.best_travel_api.api.controllers;
 import ar.com.alejandro.best_travel_api.api.models.requests.TicketRequest;
 import ar.com.alejandro.best_travel_api.api.models.responses.TicketResponse;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITicketService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping(path = "ticket")
 @RequiredArgsConstructor
+@Tag(name = "Ticket")
 public class TicketController {
 
     private final ITicketService ticketService;
