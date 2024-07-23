@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.Currency;
 import java.util.Map;
 
+
 @Data
 public class CurrencyDTO implements Serializable {
 
@@ -16,4 +17,5 @@ public class CurrencyDTO implements Serializable {
     private LocalDate exchangeDate;
 
     private Map<Currency, BigDecimal> rates;
+
 }

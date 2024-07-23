@@ -8,6 +8,7 @@ import ar.com.alejandro.best_travel_api.domain.repositories.CustomerRepository;
 import ar.com.alejandro.best_travel_api.domain.repositories.HotelRepository;
 import ar.com.alejandro.best_travel_api.domain.repositories.ReservationRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IReservationService;
+import ar.com.alejandro.best_travel_api.infraestructure.helpers.ApiCurrencyConnectorHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.BlackListHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;
 import ar.com.alejandro.best_travel_api.util.enums.Tables;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.UUID;
 
 @Transactional
@@ -34,6 +36,7 @@ public class ReservationService implements IReservationService {
     private final ReservationRepository reservationRepository;
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
+    private final ApiCurrencyConnectorHelper apiCurrencyConnectorHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -96,10 +99,14 @@ public class ReservationService implements IReservationService {
     }
 
     @Override
-    public BigDecimal findPrice(Long hotelId) {
+    public BigDecimal findPrice(Long hotelId, Currency currency) {
         var hotel = hotelRepository.findById(hotelId)
                 .orElseThrow(() -> new IdNotFoundException(Tables.hotel.name()));
-        return hotel.getPrice().add(hotel.getPrice().multiply(CHARGES_PRICE_PERCENTAGE));
+        var priceInDollars = hotel.getPrice().add(hotel.getPrice().multiply(CHARGES_PRICE_PERCENTAGE));
+        if (currency.equals(Currency.getInstance("USD"))) return priceInDollars;
+        var currencyDTO = this.apiCurrencyConnectorHelper.getCurrency(currency);
+        log.info("API currency in {}, response {}", currencyDTO.getExchangeDate().toString(), currencyDTO.getRates());
+        return priceInDollars.multiply(currencyDTO.getRates().get(currency));
     }
 
     private ReservationResponse entityToResponse(ReservationEntity entity) {
