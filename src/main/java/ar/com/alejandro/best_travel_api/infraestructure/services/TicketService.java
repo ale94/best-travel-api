@@ -10,6 +10,7 @@ import ar.com.alejandro.best_travel_api.domain.repositories.TicketRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITicketService;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.BlackListHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;
+import ar.com.alejandro.best_travel_api.infraestructure.helpers.EmailHelper;
 import ar.com.alejandro.best_travel_api.util.BestTravelUtil;
 import ar.com.alejandro.best_travel_api.util.enums.Tables;
 import ar.com.alejandro.best_travel_api.util.exceptions.IdNotFoundException;
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 
 @Transactional
@@ -34,6 +36,7 @@ public class TicketService implements ITicketService {
     private final TicketRepository ticketRepository;
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
+    private final EmailHelper emailHelper;
 
     @Override
     public TicketResponse create(TicketRequest request) {
@@ -55,6 +58,10 @@ public class TicketService implements ITicketService {
 
         var ticketPersisted = this.ticketRepository.save(ticketToPersist);
         log.info("Ticket saved with id {}", ticketPersisted.getId());
+
+        if (Objects.nonNull(request.getEmail())) {
+            this.emailHelper.sendMail(request.getEmail(), customer.getFullName(), Tables.ticket.name());
+        }
 
         this.customerHelper.incrase(customer.getDni(), TicketService.class);
 

@@ -10,6 +10,7 @@ import ar.com.alejandro.best_travel_api.domain.repositories.TourRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITourService;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.BlackListHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;
+import ar.com.alejandro.best_travel_api.infraestructure.helpers.EmailHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.TourHelper;
 import ar.com.alejandro.best_travel_api.util.enums.Tables;
 import ar.com.alejandro.best_travel_api.util.exceptions.IdNotFoundException;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,7 @@ public class TourService implements ITourService {
     private final TourHelper tourHelper;
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
+    private final EmailHelper emailHelper;
 
     @Override
     public TourResponse create(TourRequest request) {
@@ -57,6 +60,10 @@ public class TourService implements ITourService {
                 .customer(customer)
                 .build();
         var tourSaved = this.tourRepository.save(tourToSave);
+
+        if (Objects.nonNull(request.getEmail())) {
+            this.emailHelper.sendMail(request.getEmail(), customer.getFullName(), Tables.tour.name());
+        }
 
         this.customerHelper.incrase(customer.getDni(), TourService.class);
 

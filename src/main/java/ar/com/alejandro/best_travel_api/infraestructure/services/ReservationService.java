@@ -11,6 +11,7 @@ import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IReser
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.ApiCurrencyConnectorHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.BlackListHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;
+import ar.com.alejandro.best_travel_api.infraestructure.helpers.EmailHelper;
 import ar.com.alejandro.best_travel_api.util.enums.Tables;
 import ar.com.alejandro.best_travel_api.util.exceptions.IdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.Objects;
 import java.util.UUID;
 
 @Transactional
@@ -37,6 +39,7 @@ public class ReservationService implements IReservationService {
     private final CustomerHelper customerHelper;
     private final BlackListHelper blackListHelper;
     private final ApiCurrencyConnectorHelper apiCurrencyConnectorHelper;
+    private final EmailHelper emailHelper;
 
     @Override
     public ReservationResponse create(ReservationRequest request) {
@@ -59,6 +62,10 @@ public class ReservationService implements IReservationService {
 
         var reservationPersisted = this.reservationRepository.save(reservationToPersist);
         log.info("Reservation saved with id {}", reservationPersisted.getId());
+
+        if (Objects.nonNull(request.getEmail())) {
+            this.emailHelper.sendMail(request.getEmail(), customer.getFullName(), Tables.reservation.name());
+        }
 
         this.customerHelper.incrase(customer.getDni(), ReservationService.class);
 

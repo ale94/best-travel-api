@@ -45,5 +45,5 @@ public class EmailHelper {
         }
     }
 
-    private final Path TEMPLATE_PATH = Paths.get("src/main/resources/email/email_templates.html");
+    private final Path TEMPLATE_PATH = Paths.get("src/main/resources/email/email_template.html");
 }
