@@ -5,6 +5,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
@@ -28,7 +29,7 @@ public class EmailHelper {
         try {
             message.setFrom(new InternetAddress("alejandrorua111@gmail.com"));
             message.setRecipients(MimeMessage.RecipientType.TO, to);
-            message.setContent(htmlContent, "text/html; charset=utf-8");
+            message.setContent(htmlContent, MediaType.TEXT_HTML_VALUE);
             mailSender.send(message);
         } catch (MessagingException e) {
             log.error("Error to send mail", e);
