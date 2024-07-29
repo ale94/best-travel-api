@@ -1,9 +1,9 @@
-# API de Gestión de Tours
+# 💻 Best Travel API 💻
 
+## 📚 Description 📚
 Esta API REST permite gestionar tours, tickets, reservas, hoteles, clientes y vuelos. Proporciona endpoints para crear, leer, actualizar y eliminar información de cada entidad.
 
-## Endpoints
-
+## 🚀 Features 🚀
 ### Tours (Tour)
 - `GET /tours` - Obtener todos los tours
 - `POST /tours` - Crear un nuevo tour
@@ -46,21 +46,15 @@ Esta API REST permite gestionar tours, tickets, reservas, hoteles, clientes y vu
 - `PUT /flights/{id}` - Actualizar un vuelo por ID
 - `DELETE /flights/{id}` - Eliminar un vuelo por ID
 
-## Instalación
+## 🤖 Technologies 🤖
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+![Postman](https://img.shields.io/static/v1?style=for-the-badge&message=Postman&color=orange&logo=Postman&logoColor=FFFFFF&label=)
+![Maven](https://img.shields.io/static/v1?style=for-the-badge&message=Maven&color=yellow&logo=Apache&logoColor=FFFFFF&label=)
+![MySQL](https://img.shields.io/static/v1?style=for-the-badge&message=MySQL&color=0099BB&logo=Mysql&logoColor=FFFFFF&label=)
+![SpringBoot](https://img.shields.io/static/v1?style=for-the-badge&message=SpringBoot&color=00C0A3&logo=SpringBoot&logoColor=FFFFFF&label=)
+![SpringSecurity](https://img.shields.io/static/v1?style=for-the-badge&message=Spring%20Security&color=00C0A3&logo=Springsecurity&logoColor=FFFFFF&label=)
+![SpringWeb](https://img.shields.io/static/v1?style=for-the-badge&message=Spring%20Web&color=00C0A3&logo=Spring&logoColor=FFFFFF&label=)
 
-1. Clona el repositorio: `https://github.com/ale94/best-travel-api.git`
-2. Navega al directorio del proyecto: `cd best-travel-api`
-3. Instala las dependencias: `mvn install`
-4. Ejecuta la aplicación: `mvn spring-boot:run`
+## 📷 Screenshots 📷
 
-## Uso
-
-Utiliza herramientas como Postman o cURL para interactuar con los endpoints de la API.
-
-## Contribuciones
-
-¡Las contribuciones son bienvenidas! Por favor, abre un issue o envía un pull request.
-
-## Licencia
-
-Esta API está bajo la licencia MIT.
+		
