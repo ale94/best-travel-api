@@ -10,6 +10,13 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -19,7 +26,13 @@ public class ExcelService implements ReportService {
 
     @Override
     public byte[] readFile() {
-        return new byte[0];
+        try {
+            this.createReport();
+            var path = Paths.get(REPORTS_PATH, String.format(FILE_NAME, LocalDate.now().getMonth())).toAbsolutePath();
+            return Files.readAllBytes(path);
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
     }
 
     private void createReport() {
@@ -32,7 +45,7 @@ public class ExcelService implements ReportService {
 
         var header = sheet.createRow(0);
         var headerStyle = workbook.createCellStyle();
-        headerStyle.setFillBackgroundColor(IndexedColors.VIOLET.getIndex());
+        headerStyle.setFillForegroundColor(IndexedColors.VIOLET.getIndex());
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 
         var font = workbook.createFont();
@@ -43,15 +56,15 @@ public class ExcelService implements ReportService {
 
         var headerCell = header.createCell(0);
         headerCell.setCellValue(COLUMN_CUSTOMER_ID);
-        header.setRowStyle(headerStyle);
+        headerCell.setCellStyle(headerStyle);
 
-        header.createCell(1);
+        headerCell = header.createCell(1);
         headerCell.setCellValue(COLUMN_CUSTOMER_NAME);
-        header.setRowStyle(headerStyle);
+        headerCell.setCellStyle(headerStyle);
 
-        header.createCell(2);
+        headerCell = header.createCell(2);
         headerCell.setCellValue(COLUMN_CUSTOMER_PURCHASES);
-        header.setRowStyle(headerStyle);
+        headerCell.setCellStyle(headerStyle);
 
         var style = workbook.createCellStyle();
         style.setWrapText(true);
@@ -73,6 +86,18 @@ public class ExcelService implements ReportService {
             cell.setCellStyle(style);
 
             rowPos++;
+        }
+
+        var report = new File(String.format(REPORTS_PATH_WITH_NAME, LocalDate.now().getMonth()));
+        var path = report.getAbsolutePath();
+        var fileLocation = path + FILE_TYPE;
+
+        try (var outputStream = new FileOutputStream((fileLocation))) {
+            workbook.close();
+            workbook.write(outputStream);
+        } catch (IOException e) {
+            log.error("Cant create Excel", e);
+            throw new RuntimeException();
         }
     }
 
