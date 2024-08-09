@@ -1,4 +1,4 @@
-# 💻 Best Travel API 💻
+# 💻 Best Travel API REST💻
 
 ## 📚 Description 📚
 Esta API REST permite gestionar tours, tickets, reservas, hoteles, clientes y vuelos. Proporciona endpoints para crear, leer, actualizar y eliminar información de cada entidad.
