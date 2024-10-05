@@ -49,7 +49,6 @@ public class RedisConfig {
     @Bean
     @Autowired
     public CacheManager cacheManager(RedissonClient redissonClient) {
-        //Object CacheConstants;
         var configs = Map.of(
                 CacheConstants.HOTEL_CACHE_NAME, new CacheConfig(),
                 CacheConstants.FLY_CACHE_NAME, new CacheConfig()

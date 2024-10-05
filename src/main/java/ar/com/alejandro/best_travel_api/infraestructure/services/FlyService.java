@@ -40,11 +40,6 @@ public class FlyService implements IFlyService {
     @Cacheable(value = CacheConstants.FLY_CACHE_NAME)
     @Override
     public Set<FlyResponse> readLessPrice(BigDecimal price) {
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         return this.flyRepository.selectLessPrice(price)
                 .stream()
                 .map(this::entityToResponse)
@@ -55,11 +50,6 @@ public class FlyService implements IFlyService {
     @Cacheable(value = CacheConstants.FLY_CACHE_NAME)
     @Override
     public Set<FlyResponse> readBetweenPrice(BigDecimal min, BigDecimal max) {
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         return this.flyRepository.selectBetweenPrice(min, max)
                 .stream()
                 .map(this::entityToResponse)
@@ -69,11 +59,6 @@ public class FlyService implements IFlyService {
     @Cacheable(value = CacheConstants.FLY_CACHE_NAME)
     @Override
     public Set<FlyResponse> readByOriginDestiny(String origin, String destiny) {
-        try {
-            Thread.sleep(7000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         return this.flyRepository.selectOriginDestiny(origin, destiny)
                 .stream()
                 .map(this::entityToResponse)
