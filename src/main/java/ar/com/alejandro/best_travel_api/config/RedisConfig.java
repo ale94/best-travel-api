@@ -1,5 +1,6 @@
 package ar.com.alejandro.best_travel_api.config;
 
+import ar.com.alejandro.best_travel_api.util.constants.CacheConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
@@ -9,10 +10,13 @@ import org.redisson.spring.cache.RedissonSpringCacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import java.util.Map;
 
@@ -45,11 +49,21 @@ public class RedisConfig {
     @Bean
     @Autowired
     public CacheManager cacheManager(RedissonClient redissonClient) {
-        Object CacheConstants;
+        //Object CacheConstants;
         var configs = Map.of(
-                "hotels", new CacheConfig(),
-                "flights", new CacheConfig()
+                CacheConstants.HOTEL_CACHE_NAME, new CacheConfig(),
+                CacheConstants.FLY_CACHE_NAME, new CacheConfig()
         );
         return new RedissonSpringCacheManager(redissonClient, configs);
+    }
+
+    @CacheEvict(cacheNames = {
+            CacheConstants.HOTEL_CACHE_NAME,
+            CacheConstants.FLY_CACHE_NAME
+    }, allEntries = true)
+    @Scheduled(cron = CacheConstants.SCHEDULED_RESET_CACHE)
+    @Async
+    public void deleteCache() {
+        log.info("Clean cache");
     }
 }
