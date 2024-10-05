@@ -4,9 +4,11 @@ import ar.com.alejandro.best_travel_api.api.models.responses.FlyResponse;
 import ar.com.alejandro.best_travel_api.domain.entities.FlyEntity;
 import ar.com.alejandro.best_travel_api.domain.repositories.FlyRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IFlyService;
+import ar.com.alejandro.best_travel_api.util.constants.CacheConstants;
 import ar.com.alejandro.best_travel_api.util.enums.SortType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -35,8 +37,14 @@ public class FlyService implements IFlyService {
         return this.flyRepository.findAll(pageRequest).map(this::entityToResponse);
     }
 
+    @Cacheable(value = CacheConstants.FLY_CACHE_NAME)
     @Override
     public Set<FlyResponse> readLessPrice(BigDecimal price) {
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this.flyRepository.selectLessPrice(price)
                 .stream()
                 .map(this::entityToResponse)
@@ -44,16 +52,28 @@ public class FlyService implements IFlyService {
 
     }
 
+    @Cacheable(value = CacheConstants.FLY_CACHE_NAME)
     @Override
     public Set<FlyResponse> readBetweenPrice(BigDecimal min, BigDecimal max) {
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this.flyRepository.selectBetweenPrice(min, max)
                 .stream()
                 .map(this::entityToResponse)
                 .collect(Collectors.toSet());
     }
 
+    @Cacheable(value = CacheConstants.FLY_CACHE_NAME)
     @Override
     public Set<FlyResponse> readByOriginDestiny(String origin, String destiny) {
+        try {
+            Thread.sleep(7000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return this.flyRepository.selectOriginDestiny(origin, destiny)
                 .stream()
                 .map(this::entityToResponse)

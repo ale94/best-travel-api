@@ -40,7 +40,7 @@ public class RedisConfig {
     }
 
     /*
-     * Con esta configuracion podemos habilitar las anotaciones de spring cache @Cacheable
+     * Con esta configuración podemos habilitar las anotaciones de spring cache @Cacheable
      */
     @Bean
     @Autowired
