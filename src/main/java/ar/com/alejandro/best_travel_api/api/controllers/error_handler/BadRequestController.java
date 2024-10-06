@@ -4,6 +4,7 @@ import ar.com.alejandro.best_travel_api.api.models.responses.BaseErrorResponse;
 import ar.com.alejandro.best_travel_api.api.models.responses.ErrorResponse;
 import ar.com.alejandro.best_travel_api.api.models.responses.ErrorsResponse;
 import ar.com.alejandro.best_travel_api.util.exceptions.IdNotFoundException;
+import ar.com.alejandro.best_travel_api.util.exceptions.UsernameNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -16,8 +17,8 @@ import java.util.ArrayList;
 @ResponseStatus(HttpStatus.BAD_REQUEST)
 public class BadRequestController {
 
-    @ExceptionHandler(IdNotFoundException.class)
-    public BaseErrorResponse handleIdNotFoundException(IdNotFoundException exception) {
+    @ExceptionHandler({IdNotFoundException.class, UsernameNotFoundException.class})
+    public BaseErrorResponse handleNotFoundException(RuntimeException exception) {
         return ErrorResponse.builder()
                 .error(exception.getMessage())
                 .status(HttpStatus.BAD_REQUEST.name())
