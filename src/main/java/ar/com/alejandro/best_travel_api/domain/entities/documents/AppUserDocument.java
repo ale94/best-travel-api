@@ -20,6 +20,7 @@ public class AppUserDocument implements Serializable {
     private String id;
     private String dni;
     private boolean enabled;
+    private String username;
     private String password;
     private Role role;
 
