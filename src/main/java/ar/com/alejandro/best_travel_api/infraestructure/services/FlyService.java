@@ -1,8 +1,8 @@
 package ar.com.alejandro.best_travel_api.infraestructure.services;
 
 import ar.com.alejandro.best_travel_api.api.models.responses.FlyResponse;
-import ar.com.alejandro.best_travel_api.domain.entities.FlyEntity;
-import ar.com.alejandro.best_travel_api.domain.repositories.FlyRepository;
+import ar.com.alejandro.best_travel_api.domain.entities.jpa.FlyEntity;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.FlyRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IFlyService;
 import ar.com.alejandro.best_travel_api.util.constants.CacheConstants;
 import ar.com.alejandro.best_travel_api.util.enums.SortType;

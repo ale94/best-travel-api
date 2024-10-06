@@ -1,6 +1,6 @@
-package ar.com.alejandro.best_travel_api.domain.repositories;
+package ar.com.alejandro.best_travel_api.domain.repositories.jpa;
 
-import ar.com.alejandro.best_travel_api.domain.entities.HotelEntity;
+import ar.com.alejandro.best_travel_api.domain.entities.jpa.HotelEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.math.BigDecimal;

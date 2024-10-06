@@ -1,7 +1,7 @@
 package ar.com.alejandro.best_travel_api.infraestructure.services;
 
-import ar.com.alejandro.best_travel_api.domain.entities.CustomerEntity;
-import ar.com.alejandro.best_travel_api.domain.repositories.CustomerRepository;
+import ar.com.alejandro.best_travel_api.domain.entities.jpa.CustomerEntity;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.CustomerRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ReportService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

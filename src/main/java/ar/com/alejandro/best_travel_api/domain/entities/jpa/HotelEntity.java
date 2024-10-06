@@ -1,4 +1,4 @@
-package ar.com.alejandro.best_travel_api.domain.entities;
+package ar.com.alejandro.best_travel_api.domain.entities.jpa;
 
 import jakarta.persistence.*;
 import lombok.*;

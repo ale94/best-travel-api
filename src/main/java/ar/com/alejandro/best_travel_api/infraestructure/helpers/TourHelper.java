@@ -1,8 +1,8 @@
 package ar.com.alejandro.best_travel_api.infraestructure.helpers;
 
-import ar.com.alejandro.best_travel_api.domain.entities.*;
-import ar.com.alejandro.best_travel_api.domain.repositories.ReservationRepository;
-import ar.com.alejandro.best_travel_api.domain.repositories.TicketRepository;
+import ar.com.alejandro.best_travel_api.domain.entities.jpa.*;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.ReservationRepository;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.TicketRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.services.ReservationService;
 import ar.com.alejandro.best_travel_api.infraestructure.services.TicketService;
 import ar.com.alejandro.best_travel_api.util.BestTravelUtil;

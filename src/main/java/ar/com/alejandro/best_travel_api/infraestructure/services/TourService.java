@@ -2,11 +2,11 @@ package ar.com.alejandro.best_travel_api.infraestructure.services;
 
 import ar.com.alejandro.best_travel_api.api.models.requests.TourRequest;
 import ar.com.alejandro.best_travel_api.api.models.responses.TourResponse;
-import ar.com.alejandro.best_travel_api.domain.entities.*;
-import ar.com.alejandro.best_travel_api.domain.repositories.CustomerRepository;
-import ar.com.alejandro.best_travel_api.domain.repositories.FlyRepository;
-import ar.com.alejandro.best_travel_api.domain.repositories.HotelRepository;
-import ar.com.alejandro.best_travel_api.domain.repositories.TourRepository;
+import ar.com.alejandro.best_travel_api.domain.entities.jpa.*;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.CustomerRepository;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.FlyRepository;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.HotelRepository;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.TourRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ITourService;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.BlackListHelper;
 import ar.com.alejandro.best_travel_api.infraestructure.helpers.CustomerHelper;

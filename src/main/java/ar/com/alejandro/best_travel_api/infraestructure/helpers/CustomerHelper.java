@@ -1,6 +1,6 @@
 package ar.com.alejandro.best_travel_api.infraestructure.helpers;
 
-import ar.com.alejandro.best_travel_api.domain.repositories.CustomerRepository;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.CustomerRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;

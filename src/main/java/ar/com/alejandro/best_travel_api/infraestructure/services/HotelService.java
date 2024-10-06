@@ -1,8 +1,8 @@
 package ar.com.alejandro.best_travel_api.infraestructure.services;
 
 import ar.com.alejandro.best_travel_api.api.models.responses.HotelResponse;
-import ar.com.alejandro.best_travel_api.domain.entities.HotelEntity;
-import ar.com.alejandro.best_travel_api.domain.repositories.HotelRepository;
+import ar.com.alejandro.best_travel_api.domain.entities.jpa.HotelEntity;
+import ar.com.alejandro.best_travel_api.domain.repositories.jpa.HotelRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.IHotelService;
 import ar.com.alejandro.best_travel_api.util.constants.CacheConstants;
 import ar.com.alejandro.best_travel_api.util.enums.SortType;

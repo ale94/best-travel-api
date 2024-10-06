@@ -1,4 +1,4 @@
-package ar.com.alejandro.best_travel_api.domain.entities;
+package ar.com.alejandro.best_travel_api.domain.entities.jpa;
 
 import ar.com.alejandro.best_travel_api.util.enums.AeroLine;
 import jakarta.persistence.*;
