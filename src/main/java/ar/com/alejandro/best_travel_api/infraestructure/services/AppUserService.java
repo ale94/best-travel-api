@@ -1,22 +1,29 @@
 package ar.com.alejandro.best_travel_api.infraestructure.services;
 
+import ar.com.alejandro.best_travel_api.domain.entities.documents.AppUserDocument;
 import ar.com.alejandro.best_travel_api.domain.repositories.mongo.AppUserRepository;
 import ar.com.alejandro.best_travel_api.infraestructure.abstract_services.ModifyUserService;
 import ar.com.alejandro.best_travel_api.util.exceptions.UsernameNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
 @Slf4j
 @RequiredArgsConstructor
-public class AppUserService implements ModifyUserService {
+public class AppUserService implements ModifyUserService, UserDetailsService {
 
     private final AppUserRepository appUserRepository;
 
@@ -51,6 +58,31 @@ public class AppUserService implements ModifyUserService {
         log.info("User {} remove role {}", userSaved.getUsername(),
                 userSaved.getRole().getGrantedAuthorities().toString());
         return Collections.singletonMap(userSaved.getUsername(), authorities);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) {
+        var user = this.appUserRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(COLLECTION_NAME));
+        return mapUserToUserDetails(user);
+    }
+
+    private static UserDetails mapUserToUserDetails(AppUserDocument user) {
+        Set<GrantedAuthority> authorities = user.getRole()
+                .getGrantedAuthorities()
+                .stream()
+                .map(SimpleGrantedAuthority::new)
+                .collect(Collectors.toSet());
+
+        return new User(
+                user.getUsername(),
+                user.getPassword(),
+                user.isEnabled(),
+                true,
+                true,
+                true,
+                authorities
+        );
     }
 
     private static final String COLLECTION_NAME = "app_user";
